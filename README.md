@@ -303,7 +303,7 @@ http://localhost:3000
 
 ---
 
-# 🏗️ Architecture
+#  Architecture
 
 ```text
                     ┌─────────────────┐
@@ -344,7 +344,7 @@ http://localhost:3000
 
 ---
 
-# ⏰ How Email Scheduling Works
+# How Email Scheduling Works
 
 When a user schedules an email:
 
@@ -370,7 +370,7 @@ No `setTimeout()` or traditional cron job is required for scheduling.
 
 ---
 
-# 🔄 Persistence & Restart Handling
+#  Persistence & Restart Handling
 
 The system is designed so that scheduling does not depend on server memory.
 
@@ -434,21 +434,21 @@ Instead, they can be delayed and retried during the next available sending windo
 
 To prevent sudden bursts of emails:
 
-```env
+
 MIN_DELAY_BETWEEN_EMAILS_MS=2000
-```
+
 
 This introduces a minimum gap between consecutive email sends.
 
 ---
 
-# 🔁 Retries & Failure Handling
+# Retries & Failure Handling
 
 Email jobs can be configured with retries and exponential/backoff delays.
 
 If an email fails:
 
-```text
+
 Job
  │
  ├── Attempt 1 → Failed
@@ -461,30 +461,30 @@ Job
        │
        ▼
      Sent / Failed
-```
+
 
 The final status is stored in the database.
 
 ---
 
-# 📬 Bulk Email Scheduling
+# Bulk Email Scheduling
 
 For bulk campaigns, each recipient can be represented as a separate BullMQ job.
 
-```text
+
 Campaign
    │
    ├── Recipient 1 → Job 1
    ├── Recipient 2 → Job 2
    ├── Recipient 3 → Job 3
    └── Recipient 4 → Job 4
-```
+
 
 Jobs can be staggered to spread email delivery over time and respect rate limits.
 
----
 
-# 🔌 API
+
+#  API
 
 The backend provides endpoints for operations such as:
 
@@ -494,20 +494,16 @@ The backend provides endpoints for operations such as:
 * Cancel a scheduled email
 * Authentication
 
-### API Routes
+### API Routes(Examples)
 
-> Replace the examples below with your actual routes.
 
-```text
 POST   /api/emails/schedule
 GET    /api/emails/scheduled
 GET    /api/emails/sent
 DELETE /api/emails/:id
-```
 
----
 
-# 🖥️ Frontend Dashboard
+#  Frontend Dashboard
 
 The dashboard provides a central interface for managing scheduled emails.
 
@@ -526,7 +522,7 @@ For example:
 
 The dashboard contains sections for:
 
-```text
+
 Dashboard
 │
 ├── Scheduled Emails
@@ -534,7 +530,7 @@ Dashboard
 ├── Sent Emails
 │
 └── Compose Email
-```
+
 
 ### Compose Email
 
@@ -559,15 +555,10 @@ The dashboard displays information such as:
 
 Loading and empty states are also handled.
 
----
 
-# 🔐 Authentication
 
-> Add details about the authentication mechanism actually implemented.
 
-For example:
 
-```text
 Frontend
    │
    ▼
@@ -581,44 +572,42 @@ JWT
    │
    ▼
 Express API
-```
 
----
 
-# 🧪 Development
+#  Development
 
 The application requires three main processes during development:
 
 ### Terminal 1 — Redis
 
-```bash
-docker start redis
-```
+
+Docker start redis
+
 
 ### Terminal 2 — Backend API
 
-```bash
+
 cd backend
 npm run dev
-```
+
 
 ### Terminal 3 — BullMQ Worker
 
-```bash
+
 cd backend
 npm run worker
-```
+
 
 ### Terminal 4 — Frontend
 
-```bash
-cd frontend
-npm run dev
-```
 
----
+--cd frontend
+--npm run dev
 
-# ⚖️ Assumptions & Trade-offs
+
+
+
+### Assumptions & Trade-offs
 
 ### Ethereal SMTP
 
@@ -649,9 +638,9 @@ Potential improvements include:
 * Improved campaign management
 * Detailed worker/job monitoring
 
----
 
-# 📌 Key Design Decisions
+
+#   Key Design Decisions
 
 | Requirement           | Implementation                  |
 | --------------------- | ------------------------------- |
@@ -666,14 +655,5 @@ Potential improvements include:
 | Frontend              | React / Next.js                 |
 | Backend               | Express.js                      |
 
----
 
-## 📄 License
 
-Add your project's license here.
-
-For example:
-
-```text
-MIT License
-```
